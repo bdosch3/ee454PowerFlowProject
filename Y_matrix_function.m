@@ -1,10 +1,8 @@
 % Y_matrix_function.m
 % accepts input excel file and outputs the Y matrix
 
-function Y = Y_matrix_function(InputExcelFile)
-    filename = InputExcelFile;
-    input = xlsread(filename, 1);
-    [rows, cols] = size(input);
+function Y = Y_matrix_function(input)
+    [rows, ~] = size(input);
 
     % initializeing admittance matrix Y
     % largest of column 1 and 2 is the number of buses

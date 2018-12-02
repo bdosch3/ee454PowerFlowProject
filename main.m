@@ -4,8 +4,12 @@
 
 clear all; close all; clc;
 
-Y = Y_matrix_function('EE454_Project_InputData.xlsx');
-[rols, cols] = size(Y);
+input = xlsread('EE454_Project_InputData.xlsx', 1);
+Y = Y_matrix_function(input);
+
+% setting up G and B matrices
+% Y is always a square matrix
+[rols, ~] = size(Y);
 G = zeros(rols);
-B = zeros(cols);
+B = zeros(rols);
 [G,B] = G_B_matrices_function(Y);
