@@ -1,4 +1,4 @@
-function [f_x_new] = createMismatch(x, Y, N, m, PV, PQ, Vswing, thetaSwing)
+function f_x_new = createMismatch(x, Y, N, m, PV, PQ, Vswing, thetaSwing)
 %createMismatch Creates the mismatch equations
 %   inputs:
 %              x: column vector of unknowns theta(2:N) and V(m+1:N) (
@@ -25,10 +25,6 @@ pLoad  = PQ(1 : (N - 1));
 %positive Q injections for the generators will be explicit equations
 qLoad  = PQ(N : length(PQ));
 %pKnown = pGen - pLoad
-% length(pGen)
-% length(pLoad)
-% pGen - pLoad(1 : length(pGen))
-% pLoad((length(pGen) + 1) : length(pLoad))
 pKnown = [pGen - pLoad(1 : length(pGen)); ... 
          (pLoad((length(pGen) + 1) : length(pLoad)))];
      

@@ -1,5 +1,5 @@
-N = round(30*rand());
-m = round(5*rand());
+N = 12; %round(30*rand());
+m = 5; %round(5*rand());
 Yreal = rand(N,N);
 Yimag = rand(N,N);
 Y = Yreal + j*Yimag;
@@ -10,3 +10,4 @@ vswing = 1.05;
 tswing = 0;
 
 A = createMismatch(x, Y, N, m, PV, PQ, vswing, tswing);
+[theta_test, v_test] = recover_x(x, PV, dict, tswing, vswing, m, N);
