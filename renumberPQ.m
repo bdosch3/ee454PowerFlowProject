@@ -1,6 +1,12 @@
 function PQ_renumbered = renumberPQ(PQ_original, dictionary, N)
 %renumberPQ 
 %   renumber the PQ data of the loads in the system
+%   inputs:
+%       PQ_original: original data for the PQs of the loads
+%       dictionary: look up table for renumbering
+%       N: number of buses in the system
+%   output:
+%       PQ_renumbered: renumbered PQ data of the loads
 
 P_original = PQ_original(1: N - 1);
 Q_original = PQ_original(N: length(PQ_original));

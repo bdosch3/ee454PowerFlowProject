@@ -1,6 +1,11 @@
 function dictionary = createDictionary(PV_buses, N)
 %createDictionary 
 %   creates a dictionary for renumbering other data in the system
+%   input:
+%       PV_buses: column list of numbers in the system which are PV buses
+%       N: number of buses in the sytem
+%   output:
+%       dictionary: look up table to be used for renumbering data 
 
 ref = zeros(N -1, 1);
 for j = 1:(N - 1)

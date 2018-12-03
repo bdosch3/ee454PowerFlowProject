@@ -18,37 +18,37 @@ V      = [Vswing; PV(m : length(PV)); x(N : length(x))];
 %theta values are the first 2:N entries in x
 theta  =  [thetaSwing; x(1 : (N - 1))];
 %P values from PV will be positive injections into the system (ie a gen.)
-pGen   = PV(1 : (m - 1));
+Pgen   = PV(1 : (m - 1));
 %P values from PQ will be negative injections into the system (ie a load)
-pLoad  = PQ(1 : (N - 1));
+Pload  = PQ(1 : (N - 1));
 %Q values taken from the "bottom" of PQ will be negative injections
 %positive Q injections for the generators will be explicit equations
-qLoad  = PQ(N : length(PQ));
+Qload  = PQ(N : length(PQ));
 %pKnown = pGen - pLoad
-pKnown = [pGen - pLoad(1 : length(pGen)); ... 
-         (pLoad((length(pGen) + 1) : length(pLoad)))];
+Pknown = [Pgen - Pload(1 : length(Pgen)); ... 
+         (Pload((length(Pgen) + 1) : length(Pload)))];
      
 %initiate f_x_new (new mismatch equations)
 f_x_new = zeros(2*N - m - 1, 1);
 %loop through the P mismatches first. k and i represent the same indices as
 %the P and Q equations in the lecture 10 notes
 for k = 2:N
-    pComp = 0;
+    Pcomp = 0;
     for i = 1:N
         sum = V(k)*V(i) * (real(Y(k,i))*cos(theta(k) - theta(i)) ...
                         + (imag(Y(k,i))*sin(theta(k) - theta(i))));
-        pComp = pComp + sum;
+        Pcomp = Pcomp + sum;
     end
-    f_x_new(k - 1) = pComp - pKnown(k - 1);
+    f_x_new(k - 1) = Pcomp - Pknown(k - 1);
 end
 
 %next loop through Q mismatches
 for k = (m+1):N
-    qComp = 0;
+    Qcomp = 0;
     for i = 1:N
         sum = V(k)*V(i) * (real(Y(k,i))*sin(theta(k) - theta(i)) ...
                         - (imag(Y(k,i))*cos(theta(k) - theta(i))));
-        qComp = qComp + sum;
+        Qcomp = Qcomp + sum;
     end
-    f_x_new(k + N - m -1) = qComp - qLoad(k - m);
+    f_x_new(k + N - m -1) = Qcomp + Qload(k - m);
 end
