@@ -1,5 +1,5 @@
 function [J_new] = createJacobian(x, Y, N, m, PV, PQ, Vswing, thetaSwing)
-%createMismatch Creates the mismatch equations
+%createJacovian Creates the Jacobian matrix
 %   inputs:
 %              x: column vector of unknowns theta(2:N) and V(m+1:N) (
 %              Y: admittance matrix (N x N)
