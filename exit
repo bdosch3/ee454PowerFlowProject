@@ -1,0 +1,134 @@
+[33mcommit fa3ab22b37f59ecb5ba2c5342cf190d81ee64a66[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: berno3 <berno3@uw.edu>
+Date:   Mon Dec 3 15:45:12 2018 -0800
+
+    hi
+
+[33mcommit 65c857006348ec1bafcd35088884ce9f9f400dc2[m
+Author: anasshafawi <45244820+anasshafawi@users.noreply.github.com>
+Date:   Mon Dec 3 15:37:13 2018 -0800
+
+    anas test1
+
+[33mcommit f3498f76be263d69ae6e3a10000774ec3032de6a[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Sun Dec 2 21:03:08 2018 -0800
+
+    work for the day- brad
+
+[33mcommit ed833441f9d5ed30d486221e1312e59f6dc820bc[m
+Author: Alex Htut <htutk@uw.edu>
+Date:   Sun Dec 2 13:07:26 2018 -0800
+
+    updated main.m and Y_function.m
+
+[33mcommit e6bffd8e154c50e7a916ef5a781c677638f87c48[m
+Author: anasshafawi <45244820+anasshafawi@users.noreply.github.com>
+Date:   Sat Dec 1 21:14:11 2018 -0800
+
+    Add files via upload
+
+[33mcommit 51f8211d5d3ed578e09016fc2f5c0d40acb8314a[m
+Author: anasshafawi <45244820+anasshafawi@users.noreply.github.com>
+Date:   Sat Dec 1 21:13:15 2018 -0800
+
+    Delete createJacobian.m
+
+[33mcommit 3511ad3248f4135d8869ca3dfe81e78ec691cee5[m
+Author: anasshafawi <45244820+anasshafawi@users.noreply.github.com>
+Date:   Sat Dec 1 18:40:55 2018 -0800
+
+    Add files via upload
+
+[33mcommit 44d784c31e041e3f622915cd5990c79c3866e700[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Sat Dec 1 16:15:41 2018 -0800
+
+    updates for the day - brad
+    
+    see documentation for what each one does
+
+[33mcommit 4b5306f0c947936df14378d4b8cca1a61fa82303[m
+Author: Alex Htut <htutk@uw.edu>
+Date:   Sat Dec 1 10:42:50 2018 -0800
+
+    added B and G matrices
+
+[33mcommit 2540f0d4716e06018e32af4e325830a13e62ad75[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Fri Nov 30 21:24:16 2018 -0800
+
+    Delete test.txt
+
+[33mcommit e93c1cff537d8b709f83166c2e21c507f0698805[m
+Merge: 6f4570f a227b9e
+Author: Alex Htut <htutk@uw.edu>
+Date:   Fri Nov 30 21:09:40 2018 -0800
+
+    Merge branch 'master' of https://github.com/bdosch3/ee454PowerFlowProject
+
+[33mcommit 6f4570f7c5b3f018297c1b3239ef77df421ba38b[m
+Author: Alex Htut <htutk@uw.edu>
+Date:   Fri Nov 30 21:09:15 2018 -0800
+
+    makeYfunction
+
+[33mcommit a227b9e948cad7a45c3d6e2b5c4fbe8ad9b85cea[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Fri Nov 30 20:49:43 2018 -0800
+
+    Add files via upload
+    
+    create mismatch equations and its unit test. the newton Raphson part is only two lines.
+    I will want help on renumbering the buses which is necessary and going to be a challenge
+
+[33mcommit 7d46ab58fcce61839b2ccf36deb66b55200eb511[m
+Author: Alex Htut <htutk@uw.edu>
+Date:   Fri Nov 30 20:13:48 2018 -0800
+
+    added Y matrix
+
+[33mcommit 407d1766af91dc38623b75c46becbf81b4a53890[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Fri Nov 30 11:48:31 2018 -0800
+
+    Delete test.m
+
+[33mcommit 816b419a74af5ccfb9ce57e0bc69bf55e55dbd0e[m[33m ([m[1;31morigin/bernardo_edits[m[33m, [m[1;31morigin/anas_edits[m[33m)[m
+Merge: fd058e9 4764391
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Wed Nov 21 13:39:36 2018 -0800
+
+    Merge pull request #1 from bdosch3/brads_edits
+    
+    new version
+
+[33mcommit 4764391c05acdeb73e55822759a62f3e64e3cccf[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Wed Nov 21 13:35:53 2018 -0800
+
+    Add files via upload
+
+[33mcommit fd058e9c06d1a02d48d3db2207b2c255616bf2cc[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Wed Nov 21 13:28:22 2018 -0800
+
+    Add files via upload
+
+[33mcommit fe172eaa73dde1dc79afaecdf0bc1da8e795afc3[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Wed Nov 21 13:04:58 2018 -0800
+
+    Add files via upload
+
+[33mcommit 696baabdf392455217e70bc9ba00488d0c92d285[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Wed Nov 21 12:48:51 2018 -0800
+
+    Update README.md
+
+[33mcommit a4e444134cd9f8abd9e2c5f63a60cf58f54cf424[m
+Author: bdosch3 <45244281+bdosch3@users.noreply.github.com>
+Date:   Wed Nov 21 12:45:35 2018 -0800
+
+    Initial commit
