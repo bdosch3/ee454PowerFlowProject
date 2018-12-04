@@ -1,8 +1,8 @@
 %main function
-
+clear all; close all; clc;
 S_BASE = 100; %MVA
 EPS = 1e-4;
-
+thetaSwing = 0;
 %read in data of the transmission lines. separate for bus renumbering
 Ydata = xlsread('EE454_Project_InputData', 'Line_Data');
 sendingBuses = Ydata(:, 1);
@@ -13,11 +13,15 @@ N = max([sendingBuses; receivingBuses]);
 
 %read in PV data and manipulate as necessary
 PVdata = xlsread('EE454_Project_InputData', 'PV_Data');
+% can't do this following line for two reasons
+% 1) col 1 is bus #
+% 2) col 3 (V data) is already in p.u.
+% V2 = 1.045 got rounded to 1.05
 PVdata = PVdata./S_BASE;
 m = length(PVdata);
 Vswing = PVdata(1, 3);
 %list of buses in the system which are PV
-PV_buses = PVdata((2:end), 1);
+PV_buses = 100 * PVdata((2:end), 1);
 PV = [PVdata((2:end), 2); PVdata((2:end), 3)];
 
 %create dictionary for bus renumbering
