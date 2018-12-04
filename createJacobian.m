@@ -1,5 +1,5 @@
 function [J_new] = createJacobian(x, Y, N, m, PV, PQ, Vswing, thetaSwing)
-%createMismatch Creates the mismatch equations
+%createJacovian Creates the Jacobian matrix
 %   inputs:
 %              x: column vector of unknowns theta(2:N) and V(m+1:N) (
 %              Y: admittance matrix (N x N)
@@ -50,7 +50,7 @@ for k = 1:(2*N-m-1)
                 J_new(k,j) = -V(k-N+1+m)*V(j+1)*((real(Y(k-N+m,j+1)))*(cos(theta(k-N+m)-theta(j+1)))... 
                             + (imag(Y(k-N+m,j+1))*(sin(theta(k-N+m)-theta(j+1)))));
             else
-                J_new(k,j) = pLoad(k-N+m)-(V(k-N+m)^2)*(real(Y(k-N+m,j+1)));
+                J_new(k,j) = pLoad(k-N+m+1)-(V(k-N+m)^2)*(real(Y(k-N+m,j+1)));
             end
         % at J_12
         elseif j > (N-1) && k <= (N-1)
@@ -66,7 +66,7 @@ for k = 1:(2*N-m-1)
                 J_new(k,j) = V(k-N+m)*((real(Y(k-N+m,j-N+m)))*(sin(theta(k-N+m)-theta(j-N+m)))... 
                             - (imag(Y(k-N+m,j-N+m)))*(cos(theta(k-N+m)-theta(j-N+m))));
             else
-                J_new(k,j) = (qLoad(k-N+m)/V(k-N+m))-V(k-N+m)*(real(Y(k-N+m,j-N+m)));
+                J_new(k,j) = (qLoad(k-N+m+1)/V(k-N+m))-V(k-N+m)*(real(Y(k-N+m,j-N+m)));
             end
         end
     end
