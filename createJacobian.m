@@ -27,15 +27,15 @@ qLoad  = PQ(N : length(PQ));
      
 %initiate J_new (new Jacobian square matrix)
 %size of J = 2(N-1) by 2(N-1)
-J_new = zeros(2*N-2);
+J_new = zeros(2*N-1-m);
 
 %k and i represent row and column number respectively
 %the derivative equations are obtained in the lecture 10 notes
 
 %loop through k
-for k = 1:(2*N-2)
+for k = 1:(2*N-m-1)
     %loop through j
-    for j = 1:(2*N-2)
+    for j = 1:(2*N-m-1)
         % at J_11
         if j <= (N-1) && k <= (N-1)
             if j ~= k
@@ -47,26 +47,26 @@ for k = 1:(2*N-2)
         % at J_21    
         elseif j <= (N-1) && k > (N-1)
             if j ~= k
-                J_new(k,j) = -V(k+2-N)*V(j+1)*((real(Y(k+2-N,j+1)))*(cos(theta(k+2-N)-theta(j+1)))... 
-                            + (imag(Y(k+2-N,j+1))*(sin(theta(k+2-N)-theta(j+1)))));
+                J_new(k,j) = -V(k-N+1+m)*V(j+1)*((real(Y(k-N+m,j+1)))*(cos(theta(k-N+m)-theta(j+1)))... 
+                            + (imag(Y(k-N+m,j+1))*(sin(theta(k-N+m)-theta(j+1)))));
             else
-                J_new(k,j) = pLoad(k+1-N)-(V(k+2-N)^2)*(real(Y(k+2-N,j+1)));
+                J_new(k,j) = pLoad(k-N+m)-(V(k-N+m)^2)*(real(Y(k-N+m,j+1)));
             end
         % at J_12
         elseif j > (N-1) && k <= (N-1)
             if j ~= k
-                J_new(k,j) = V(k+1)*(real(Y(k+1,j+2-N))*cos(theta(k+1)-theta(j+2-N))... 
-                            + (imag(Y(k+1,j+2-N)))*sin(theta(k+1)-theta(j+2-N)));
+                J_new(k,j) = V(k+1)*(real(Y(k+1,j-N+m))*cos(theta(k+1)-theta(j-N+m))... 
+                            + (imag(Y(k+1,j-N+m)))*sin(theta(k+1)-theta(j-N+m)));
             else
-                J_new(k,j) = (pLoad(k)/V(k+1)) + V(k+1)*(real(Y(k+1,j+2-N)));
+                J_new(k,j) = (pLoad(k)/V(k+1)) + V(k+1)*(real(Y(k+1,j-N+m)));
             end
         % at J_22
         else
             if j ~= k
-                J_new(k,j) = V(k+2-N)*((real(Y(k+2-N,j+2-N)))*(sin(theta(k+2-N)-theta(j+2-N)))... 
-                            - (imag(Y(k+2-N,j+2-N)))*(cos(theta(k+2-N)-theta(j+2-N))));
+                J_new(k,j) = V(k-N+m)*((real(Y(k-N+m,j-N+m)))*(sin(theta(k-N+m)-theta(j-N+m)))... 
+                            - (imag(Y(k-N+m,j-N+m)))*(cos(theta(k-N+m)-theta(j-N+m))));
             else
-                J_new(k,j) = (qLoad(k+1-N)/V(k+2-N))-V(k+2-N)*(real(Y(k+2-N,j+2-N)));
+                J_new(k,j) = (qLoad(k-N+m)/V(k-N+m))-V(k-N+m)*(real(Y(k-N+m,j-N+m)));
             end
         end
     end
