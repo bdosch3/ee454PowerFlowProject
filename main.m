@@ -1,8 +1,9 @@
 %main function
-clear all; close all; clc;
+
 S_BASE = 100; %MVA
-EPS = 1e-4;
+EPS = 1e-2;
 thetaSwing = 0;
+
 %read in data of the transmission lines. separate for bus renumbering
 Ydata = xlsread('EE454_Project_InputData', 'Line_Data');
 sendingBuses = Ydata(:, 1);
@@ -13,15 +14,11 @@ N = max([sendingBuses; receivingBuses]);
 
 %read in PV data and manipulate as necessary
 PVdata = xlsread('EE454_Project_InputData', 'PV_Data');
-% can't do this following line for two reasons
-% 1) col 1 is bus #
-% 2) col 3 (V data) is already in p.u.
-% V2 = 1.045 got rounded to 1.05
-PVdata = PVdata./S_BASE;
+PVdata(:,2) = PVdata(:,2)./S_BASE;
 m = length(PVdata);
 Vswing = PVdata(1, 3);
 %list of buses in the system which are PV
-PV_buses = 100 * PVdata((2:end), 1);
+PV_buses = PVdata((2:end), 1);
 PV = [PVdata((2:end), 2); PVdata((2:end), 3)];
 
 %create dictionary for bus renumbering
@@ -48,10 +45,13 @@ x = [zeros(N - 1, 1); ones(N - m, 1)];
 f_x = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
 
 %perform newton raphson until convergence is satisfied
-while f_x > EPS
+count = 0;
+while sum(f_x > EPS) ~= 0
     jacobian = createJacobian(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
     x = newtonRaphson(jacobian, f_x, x);
     f_x = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
+    count = count + 1;
+    count
 end
 
 %extract all the renumbered data
@@ -59,9 +59,9 @@ end
 solveExplicitEquations(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
 
 %recover the original numbering
-theta_original = recover(theta_renumbered, dictionary, N);
-V_original = recover(V_renumbered, dictionary, N);
-P_original = recover(P_renumbered, dictionary, N);
-Q_original = recover(Q_renumbered, dictionary, N);
+theta_original = recover(theta_renumbered, [1; dictionary], N);
+V_original = recover(V_renumbered, [1; dictionary], N);
+P_original = recover(P_renumbered, [1; dictionary], N);
+Q_original = recover(Q_renumbered, [1; dictionary], N);
 
 %write these out to excel file
