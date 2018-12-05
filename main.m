@@ -42,17 +42,17 @@ PQ_renumbered = renumberPQ(PQ_original, dictionary, N);
 x = [zeros(N - 1, 1); ones(N - m, 1)];
 
 %form initial mismatch equations
-f_x = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
+[f_x, f_comp] = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
 
 %perform newton raphson until convergence is satisfied
 count = 0;
-while sum(f_x > EPS) ~= 0
+%while sum(f_x > EPS) ~= 0
     jacobian = createJacobian(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
     x = newtonRaphson(jacobian, f_x, x);
     f_x = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
     count = count + 1;
     count
-end
+%end
 
 %extract all the renumbered data
 [theta_renumbered, V_renumbered, P_renumbered, Q_renumbered] = ...

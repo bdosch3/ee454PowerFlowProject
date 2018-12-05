@@ -1,4 +1,4 @@
-function f_x_new = createMismatch(x, Y, N, m, PV, PQ, Vswing, thetaSwing)
+function [f_x_new, p_comp] = createMismatch(x, Y, N, m, PV, PQ, Vswing, thetaSwing)
 %createMismatch Creates the mismatch equations
 %   inputs:
 %              x: column vector of unknowns theta(2:N) and V(m+1:N) (
@@ -30,6 +30,7 @@ Pknown = [Pgen - Pload(1 : length(Pgen)); ...
      
 %initiate f_x_new (new mismatch equations)
 f_x_new = zeros(2*N - m - 1, 1);
+f_comp  = zeros(N - 1, 1);
 %loop through the P mismatches first. k and i represent the same indices as
 %the P and Q equations in the lecture 10 notes
 for k = 2:N
@@ -40,6 +41,7 @@ for k = 2:N
         Pcomp = Pcomp + sum;
     end
     f_x_new(k - 1) = Pcomp - Pknown(k - 1);
+    f_comp (k - 1) = Pcomp;
 end
 
 %next loop through Q mismatches
@@ -50,5 +52,5 @@ for k = (m+1):N
                         - (imag(Y(k,i))*cos(theta(k) - theta(i))));
         Qcomp = Qcomp + sum;
     end
-    f_x_new(k + N - m -1) = Qcomp + Qload(k - m);
+    f_x_new(k + N - m -1) = Qcomp + Qload(k - 1);
 end
