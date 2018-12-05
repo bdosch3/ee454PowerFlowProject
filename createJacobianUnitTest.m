@@ -9,7 +9,7 @@ x = rand(2*N - m - 1, 1);
 vswing = 1.05;
 tswing = 0;
 
-A = createJacobian(x, Y, N, m, PV, PQ, vswing, tswing);
+A = createJacobian(x, Y, N, m, PV, PQ(2:N), vswing, tswing);
 %[theta_test, v_test] = recover_x(x, PV, dict, tswing, vswing, m, N);
  Ainv = inv(A);
  
