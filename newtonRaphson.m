@@ -3,10 +3,7 @@ function x_new = newtonRaphson(J, f_x, x_old)
 %   input: ...
 %   output: ...
 
-invJacobian = inv(J);
-dx = invJacobian * f_x;
-d_x = -1.*dx;
-%dx = (-1).*(inv(J))*(x_old);
-x_new = x_old + d_x;
+dx = -1*J\f_x
+x_new = x_old + dx;
 end
 

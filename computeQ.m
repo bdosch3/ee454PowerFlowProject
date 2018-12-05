@@ -1,6 +1,6 @@
 function Qcomp = computeQ(Y, N, m, theta, V)
 %next loop through Q mismatches
-Qcomp = zeros(N-1, 1)
+Qcomp = zeros(N-1, 1);
     for k = 2:N
         Qsum = 0;
         for i = 1:N

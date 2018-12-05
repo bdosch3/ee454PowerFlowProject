@@ -1,5 +1,5 @@
 %main function
-
+clear all
 S_BASE = 100; %MVA
 EPS = 1e-2;
 thetaSwing = 0;
@@ -47,21 +47,22 @@ x = [zeros(N - 1, 1); ones(N - m, 1)];
 %perform newton raphson until convergence is satisfied
 count = 0;
 %while sum(f_x > EPS) ~= 0
-    jacobian = createJacobian(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
+for k = 1:5
+    jacobian = createJacobian(x, Y, N, m, PV, f_comp, Vswing, thetaSwing);
     x = newtonRaphson(jacobian, f_x, x);
     f_x = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
     count = count + 1;
     count
-%end
+end
 
 %extract all the renumbered data
 [theta_renumbered, V_renumbered, P_renumbered, Q_renumbered] = ...
 solveExplicitEquations(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
 
 %recover the original numbering
-theta_original = recover(theta_renumbered, [1; dictionary], N);
-V_original = recover(V_renumbered, [1; dictionary], N);
-P_original = recover(P_renumbered, [1; dictionary], N);
-Q_original = recover(Q_renumbered, [1; dictionary], N);
+% theta_original = recover(theta_renumbered, [1; dictionary], N);
+% V_original = recover(V_renumbered, [1; dictionary], N);
+% P_original = recover(P_renumbered, [1; dictionary], N);
+% Q_original = recover(Q_renumbered, [1; dictionary], N);
 
 %write these out to excel file

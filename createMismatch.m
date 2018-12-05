@@ -1,4 +1,4 @@
-function [f_x_new, p_comp] = createMismatch(x, Y, N, m, PV, PQ, Vswing, thetaSwing)
+function [f_x_new, f_comp] = createMismatch(x, Y, N, m, PV, PQ, Vswing, thetaSwing)
 %createMismatch Creates the mismatch equations
 %   inputs:
 %              x: column vector of unknowns theta(2:N) and V(m+1:N) (
