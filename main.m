@@ -1,7 +1,7 @@
 %main function
 clear all
 S_BASE = 100; %MVA
-EPS = 1e-2;
+EPS = 1e-10;
 thetaSwing = 0;
 
 %read in data of the transmission lines. separate for bus renumbering
@@ -46,9 +46,9 @@ x = [zeros(N - 1, 1); ones(N - m, 1)];
 
 %perform newton raphson until convergence is satisfied
 count = 0;
-%while sum(f_x > EPS) ~= 0
-for k = 1:5
-    jacobian = createJacobian(x, Y, N, m, PV, f_comp, Vswing, thetaSwing);
+while max(f_x) > EPS
+%for k = 1:5
+    jacobian = createJacobianAlex(x, Y, N, m, PV, f_comp, Vswing, thetaSwing);
     x = newtonRaphson(jacobian, f_x, x);
     f_x = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
     count = count + 1;
