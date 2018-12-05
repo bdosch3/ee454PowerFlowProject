@@ -61,7 +61,7 @@ for k = 2:m
                imag(Y(k, i))*cos(theta(k) - theta(i)));
         Qcomp = Qcomp + sum;
     end
-    Qgen(k) = Qcomp + Qload;
+    Qgen(k) = Qcomp + Qload(k - 1);
 end
 
 Qknown = [Qgen - Qload(1 : length(Qgen)); ... 
