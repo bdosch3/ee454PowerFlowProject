@@ -1,15 +1,13 @@
 % Y_matrix_function.m
 % accepts input excel file and outputs the Y matrix
 
-function Y = Y_matrix_function(input)
-    [rows, ~] = size(input);
-
+function Y = createY(input, N)
     % initializeing admittance matrix Y
     % largest of column 1 and 2 is the number of buses
-    tempY = zeros(max(max(input(:,1), max(input(:,2)))));
+    tempY = zeros(N);
 
     % modify input to get Y
-    for i = 1:rows
+    for i = 1:length(input(:, 1))
         % adding R+jX 
         currentRow = input(i,:);
         line1 = currentRow(1);

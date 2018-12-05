@@ -30,7 +30,7 @@ receivingBusesRenumbered = renumberBuses(receivingBuses, dictionary);
 YdataRenumbered = [sendingBusesRenumbered, receivingBusesRenumbered, RXBvalues];
 
 %create Y matrix
-Y = Y_matrix_function(YdataRenumbered);
+Y = createY(YdataRenumbered, N);
 
 %read in the PQ data of the loads. renumber to line up with new convention
 PQ = xlsread('EE454_Project_InputData', 'Load_Data');
