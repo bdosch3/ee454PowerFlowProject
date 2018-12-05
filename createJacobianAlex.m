@@ -1,17 +1,38 @@
-function J = createJacobianAlex(x, Y, N, m, PV, f_comp, Vswing, thetaSwing)
+function J = createJacobianAlex(x, Y, N, m, PV, pCompFromMismatch, Vswing, thetaSwing)
+    % Assign V values.
+    % V1 is from swing bus.
+    % V2 to V5 are known values from PV buses (renumbered).
+    % V6 to V12 are initial values of x.
     V = [Vswing; PV(m : length(PV)); x(N : length(x))];
+    
+    % theta1 is the only known values from swing bus.
+    % theta2 to theta12 are initial values of x.
 	theta = [thetaSwing; x(1:(N-1))];
-	pComp = [NaN; f_comp(1: (N-1))];
+    
+    % compute P values from the power flow equations.
+    % add filler NaN value to make sure we don't use P1.
+    % we calculated pComp in mismatch in createMismatch.m,
+    % thus recycle it instead of reusing it.
+	pComp = [NaN; pCompFromMismatch];
+    
+    % compute Q values from the power flow equations.
+    % add filler NaN value to make sure we don't use Q1.
+    % we only calculated Q6 to Q12 in mismatch.
+    % since we need Q2 to Q12 here, we use the same power flow
+    % equation to compute Q values in computeQ.m
 	qComp = [NaN; computeQ(Y, N, m, theta, V)];
 	
 	% J is J_size x J_size matrx  (18x18)
 	J_size = 2*N-1-m;
 	
+    % four quadrants have different sizes
 	J11 = zeros(N-1); %11x11
 	J12 = zeros(N-1, J_size-N+1); %11x7
 	J21 = zeros(J_size-N+1, N-1); %7x11
 	J22 = zeros(J_size-N+1, J_size-N+1); %7x7
 	
+    % The following values for each quadrant are assigned based on
+    % the equations from Lecture Note 10
 	% J11 matrix
 	for k = 2:N
 		for j = 2:N
