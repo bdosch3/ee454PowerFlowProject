@@ -1,7 +1,7 @@
 %main function
 clear all
 S_BASE = 100; %MVA
-EPS = 1e-10;
+EPS = 1e-6;
 thetaSwing = 0;
 
 %read in data of the transmission lines. separate for bus renumbering
@@ -34,8 +34,8 @@ Y = createY(YdataRenumbered, N);
 
 %read in the PQ data of the loads. renumber to line up with new convention
 PQ = xlsread('EE454_Project_InputData', 'Load_Data');
-PQ = PQ./S_BASE;
 PQ_original = [PQ(:, 2); PQ(:, 3)];
+PQ_original = PQ_original./S_BASE;
 PQ_renumbered = renumberPQ(PQ_original, dictionary, N);
 
 %initial guess with all theta = 0 and all V = 1 pu
@@ -47,7 +47,7 @@ x = [zeros(N - 1, 1); ones(N - m, 1)];
 %perform newton raphson until convergence is satisfied
 count = 0;
 while max(f_x) > EPS
-%for k = 1:5
+%for k = 1:11
     jacobian = createJacobianAlex(x, Y, N, m, PV, f_comp, Vswing, thetaSwing);
     x = newtonRaphson(jacobian, f_x, x);
     f_x = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
@@ -60,9 +60,10 @@ end
 solveExplicitEquations(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
 
 %recover the original numbering
-% theta_original = recover(theta_renumbered, [1; dictionary], N);
-% V_original = recover(V_renumbered, [1; dictionary], N);
-% P_original = recover(P_renumbered, [1; dictionary], N);
-% Q_original = recover(Q_renumbered, [1; dictionary], N);
+theta_original = recover(theta_renumbered, [1; dictionary], N);
+theta_deg = (180/pi).*theta_original;
+V_original = recover(V_renumbered, [1; dictionary], N);
+P_original = S_BASE.*(recover(P_renumbered, [1; dictionary], N));
+Q_original = S_BASE.*(recover(Q_renumbered, [1; dictionary], N));
 
 %write these out to excel file
