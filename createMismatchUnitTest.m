@@ -1,5 +1,7 @@
-N = 12; %round(30*rand());
-m = 5; %round(5*rand());
+%unit test for creating mismatching 
+
+N = round(30*rand());
+m = round(5*rand());
 Yreal = rand(N,N);
 Yimag = rand(N,N);
 Y = Yreal + j*Yimag;

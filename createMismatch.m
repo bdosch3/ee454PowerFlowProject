@@ -1,17 +1,19 @@
 function [f_x_new, f_comp] = createMismatch(x, Y, N, m, PV, PQ, Vswing, thetaSwing)
-%createMismatch Creates the mismatch equations
-%   inputs:
-%              x: column vector of unknowns theta(2:N) and V(m+1:N) (
-%              Y: admittance matrix (N x N)
-%              N: number of buses in the system
-%              m: m - 1 = number of PV buses in the system
-%              PV: values of PV from the generators in the system (2*m - 2)
-%              PQ: values of PQ from the loads in the system (2*N - 2)
-%              Vswing: voltage at the swing bus (bus 1)
-%              thetaSwing: angle at the swing bus (bus 1)
-%   outputs:
-%              f_x_new: new mismatch equations
-
+%{
+createMismatch Creates the mismatch equations
+  inputs:
+             x: column vector of unknowns theta(2:N) and V(m+1:N) (
+             Y: admittance matrix (N x N)
+             N: number of buses in the system
+             m: m - 1 = number of PV buses in the system
+             PV: values of PV from the generators in the system (2*m - 2)
+             PQ: values of PQ from the loads in the system (2*N - 2)
+             Vswing: voltage at the swing bus (bus 1)
+             thetaSwing: angle at the swing bus (bus 1)
+  outputs:
+             f_x_new: new mismatch equations
+%}
+             
 %voltage values are taken from PV buses if known. if not known, they are
 %taken from the values of x[]
 V      = [Vswing; PV(m : length(PV)); x(N : length(x))];

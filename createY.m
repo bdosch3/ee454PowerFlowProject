@@ -1,10 +1,19 @@
-% Y_matrix_function.m
-% accepts input excel file and outputs the Y matrix
-
 function Y = createY(input, N)
-    % initializeing admittance matrix Y
-    % largest of column 1 and 2 is the number of buses
-    tempY = zeros(N);
+%{
+outputs admittance matrix Y
+inputs:
+    input: matrix form of Line_Data table, which has format:
+    sendingBus receivingBus  R    X    B    Fmax
+    --------------------------------------------
+        1            2       #    #    #    #
+    and is (# of Lines x 6) big
+    N: number of buses in the system
+outputs:
+    Y: admittance matrix
+%}
+
+    % Y is NxN
+    Y = zeros(N);
 
     % modify input to get Y
     for i = 1:length(input(:, 1))
@@ -13,10 +22,10 @@ function Y = createY(input, N)
         line1 = currentRow(1);
         line2 = currentRow(2);
         Y_total = 1/(currentRow(3) + j * currentRow(4));
-        tempY(line1, line1) = tempY(line1, line1) + Y_total;
-        tempY(line2, line2) = tempY(line2, line2) + Y_total;
-        tempY(line1, line2) = tempY(line1, line2) - Y_total; 
-        tempY(line2, line1) = tempY(line2, line1) - Y_total;
+        Y(line1, line1) = Y(line1, line1) + Y_total;
+        Y(line2, line2) = Y(line2, line2) + Y_total;
+        Y(line1, line2) = Y(line1, line2) - Y_total; 
+        Y(line2, line1) = Y(line2, line1) - Y_total;
 
         % adding shunt reactances
         B_total = currentRow(5);
@@ -25,9 +34,8 @@ function Y = createY(input, N)
             % since G is zero, Y = jB
             % in pi model, each bus 'gets' half of Y
             halfY = 0.5 * (j * B_total);
-            tempY(line1, line1) = tempY(line1, line1) + halfY;
-            tempY(line2, line2) = tempY(line2, line2) + halfY;
+            Y(line1, line1) = Y(line1, line1) + halfY;
+            Y(line2, line2) = Y(line2, line2) + halfY;
         end
     end
-    Y = tempY;
 end
