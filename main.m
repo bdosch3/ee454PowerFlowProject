@@ -71,11 +71,7 @@ function main(inputFile, outputFile, inputLineData, generalOutput,...
     V_original = recover(V_renumbered, [1; dictionary], N);
     P_original = S_BASE.*(recover(P_renumbered, [1; dictionary], N));
     Q_original = S_BASE.*(recover(Q_renumbered, [1; dictionary], N));
-    
-    % excel file ranges for labels and data
-    labelRange = 'A1';
-    dataRange = 'A2';
-    
+        
     % determine whether the calculated V values exceed the range:
     % 0.95 < V < 1.05
     % genearlData includes P, Q, V, theta values, V limit check at each bus
@@ -83,17 +79,15 @@ function main(inputFile, outputFile, inputLineData, generalOutput,...
     busNumber = createBusNumber(N);
     generalData = [busNumber, theta_deg, V_original, P_original, ...
                     Q_original, VLimit];
-    generalLabel = {'Bus Number', 'Angle (degrees)', 'V (p.u.)', ...
-              'P (MW)', 'Q (MVAr)', 'Exceeds Vlimit?'}; 
-    xlswrite(outputFile,generalLabel,generalOutput,labelRange);
-    xlswrite(outputFile,generalData,generalOutput,dataRange);
+    generalLabel = ["Bus Number", "Angle (degrees)", "V (p.u.)", ...
+              "P (MW)", "Q (MVAr)", "Exceeds Vlimit?"]; 
+    xlswrite(outputFile, [generalLabel; generalData], generalOutput);
     
     % lineData has |S|, P, Q, Fmax check for each transmission line
     lineData = createLineData(S_BASE, V_original, theta_original, Ydata);
-    lineLabel = {'sendingBus', 'receivingBus', '|S| (MVA)', ...
-                 'P (MW)', 'Q (MVAr)', 'Exceeds Fmax?'};
-    xlswrite(outputFile,lineLabel,lineDataOutput,labelRange);
-    xlswrite(outputFile,lineData,lineDataOutput,dataRange);
+    lineLabel = ["sendingBus", "receivingBus", "|S| (MVA)", ...
+                 "P (MW)", "Q (MVAr)", "Exceeds Fmax?"];
+    xlswrite(outputFile, [lineLabel; lineData], lineDataOutput);
     
     iterLabel = ["Iteration Number",...
                  "Max. P" + newline + "Mismatch Magnitude (MW)",...
