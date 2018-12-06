@@ -1,3 +1,6 @@
+% createJacobian.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function J = createJacobian(x, Y, N, m, PV, pCompFromMismatch, Vswing, thetaSwing)
 %{
 creates Jacobain matrix

@@ -1,3 +1,6 @@
+% checkVLimit.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function VLimit = checkVLimit(V)
 %{
 checks if calculated V exceeds the V range: 

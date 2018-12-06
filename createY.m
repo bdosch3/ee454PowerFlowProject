@@ -1,3 +1,6 @@
+% createY.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function Y = createY(input, N)
 %{
 outputs admittance matrix Y

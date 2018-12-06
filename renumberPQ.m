@@ -1,3 +1,6 @@
+% renumberPQ.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function PQ_renumbered = renumberPQ(PQ_original, dictionary, N)
 %{
 renumberPQ: renumber the PQ data of the loads in the system

@@ -1,3 +1,6 @@
+% renumberUnitTest.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 %unit test for the renumbering scheme
 
 %hardcode values that we know the answers for

@@ -15,5 +15,5 @@ tswing = 0;
 %run the function and see if reasonable
 A = createJacobian(x, Y, N, m, PV, PQ(2:N), vswing, tswing);
 %[theta_test, v_test] = recover_x(x, PV, dict, tswing, vswing, m, N);
- Ainv = inv(A);
+Ainv = inv(A);
  

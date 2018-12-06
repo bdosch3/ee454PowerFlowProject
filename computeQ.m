@@ -1,3 +1,6 @@
+% computeQ.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function Qcomp = computeQ(Y, N, m, theta, V)
 %{
 computes Q values for bus 2 to bus 12
@@ -11,8 +14,8 @@ outputs:
     Qcomp: computed Q2 to Q12 values
 %}
 
-% Qcomp is 11x1 vector
-Qcomp = zeros(N-1, 1);
+    % Qcomp is 11x1 vector
+    Qcomp = zeros(N-1, 1);
     for k = 2:N
         Qsum = 0;
         for i = 1:N

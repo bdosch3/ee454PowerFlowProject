@@ -1,3 +1,6 @@
+% solveExplicitEquations.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function [theta, V, P, Q] = ...
 solveExplicitEquations(x, Y, N, m, PV, PQ, ...
 PV_buses, Vswing, thetaSwing, S_BASE, outputFile, powerInfoOutput)
@@ -11,22 +14,22 @@ solveExplicitEquations
   buses. This function also writes the P and Q values of the generators
   to the output excel file.
 
-  inputs:
-             x: column vector of unknowns theta(2:N) and V(m+1:N) (
-             Y: admittance matrix (N x N)
-             N: number of buses in the system
-             m: m - 1 = number of PV buses in the system
-             PV: values of PV from the generators in the system (2*m - 2)
-             PQ: values of PQ from the loads in the system (2*N - 2)
-             PV_buses: list of buses in the system that are PV buses
-             Vswing: voltage at the swing bus (bus 1)
-             thetaSwing: angle at the swing bus (bus 1)
-             S_BASE: apparent power base for per unit scaling
-  outputs:
-             theta: theta values at buses 1-N
-             V: voltage values at buses 1-N 
-             P: real power values at buses 1-N
-             Q: reactive power values at buses 1-N
+inputs:
+    x: column vector of unknowns theta(2:N) and V(m+1:N) (
+    Y: admittance matrix (N x N)
+    N: number of buses in the system
+    m: m - 1 = number of PV buses in the system
+    PV: values of PV from the generators in the system (2*m - 2)
+    PQ: values of PQ from the loads in the system (2*N - 2)
+    PV_buses: list of buses in the system that are PV buses
+    Vswing: voltage at the swing bus (bus 1)
+    thetaSwing: angle at the swing bus (bus 1)
+    S_BASE: apparent power base for per unit scaling
+outputs:
+    theta: theta values at buses 1-N
+    V: voltage values at buses 1-N 
+    P: real power values at buses 1-N
+    Q: reactive power values at buses 1-N
 %}
 
     %voltage values are taken from PV buses if known. if not known, they are

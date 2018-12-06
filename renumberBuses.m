@@ -1,12 +1,15 @@
+% renumberBuses.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function newBusData = renumberBuses(buses, dictionary)
-    %{
-    renumberBuses renumbers the buses for the Y matrix
-    inputs: 
-        buses: column list of buses to be renumbered
-        dictionary: look up table used for renumbering
-    outputs: 
-        newBusData: renumbered buses to match up with mismatch equations
-    %}
+%{
+renumberBuses renumbers the buses for the Y matrix
+inputs: 
+    buses: column list of buses to be renumbered
+    dictionary: look up table used for renumbering
+outputs: 
+    newBusData: renumbered buses to match up with mismatch equations
+ %}
     
     dictionary = [1; dictionary];
     newBusData = zeros(length(buses), 1);

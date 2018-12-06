@@ -1,7 +1,23 @@
-%main function
+% main.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function main(inputFile, outputFile, inputLineData, generalOutput,...
     lineDataOutput, iterRecordOutput, powerInfoOutput)
-
+%{
+runs the powerflow program by importing in the given data excel file and
+exporting four output data sheets (generalOutput, lineDataOutput, 
+iterRecord, genPowerInfo)
+inputs:
+    inputFile: excel file filled with given data (from the manual)
+    outputFile: targeted excel file to export four output sheets
+    generalOutput: info on P, Q, V, theta, VlimitCheck for each bus
+    lineDataOutput: info on |S|, P, Q, FlimitCheck for each line
+    iterRecordOutput: log of max real and reactive mismatches of 
+                      each NR iteration
+    powerInfoOutput: info on P, Q values for each generator
+outputs:
+    N/A: void function
+%}
     S_BASE = 100; %MVA
     EPS = 0.1/S_BASE;
     thetaSwing = 0;
@@ -29,12 +45,14 @@ function main(inputFile, outputFile, inputLineData, generalOutput,...
     % renumber buses and prepare data for creating the Y matrix
     sendingBusesRenumbered =   renumberBuses(sendingBuses, dictionary);
     receivingBusesRenumbered = renumberBuses(receivingBuses, dictionary);
-    YdataRenumbered = [sendingBusesRenumbered, receivingBusesRenumbered, RXBvalues];
+    YdataRenumbered = [sendingBusesRenumbered, ...
+                       receivingBusesRenumbered, RXBvalues];
 
     % create Y matrix
     Y = createY(YdataRenumbered, N);
 
-    % read in the PQ data of the loads. renumber to line up with new convention
+    % read in the PQ data of the loads
+    % renumber to line up with new convention
     PQ = xlsread(inputFile, 'Load_Data');
     PQ_original = [PQ(:, 2); PQ(:, 3)];
     PQ_original = PQ_original./S_BASE;
@@ -44,16 +62,18 @@ function main(inputFile, outputFile, inputLineData, generalOutput,...
     x = [zeros(N - 1, 1); ones(N - m, 1)];
 
     % form initial mismatch equations
-    [f_x, f_comp] = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);
+    [f_x, f_comp] = createMismatch(x, Y, N, m, PV, PQ_renumbered, ...
+                                   Vswing, thetaSwing);
     
-    %prepare iteration record for looping. we have no way of knowing the size,
-    %so it will grow each time
+    %prepare iteration record for looping. 
+    %we have no way of knowing the size, so it will grow each time
     iterationRecord = [];
     
     % perform newton raphson until convergence is satisfied
     count = 1;
     while max(f_x) > EPS
-        iterationRecord = [iterationRecord; recordIteration(f_x, S_BASE, count, dictionary, N, m)];
+        iterationRecord = [iterationRecord; recordIteration(f_x, ...
+                           S_BASE, count, dictionary, N, m)];
         jacobian = createJacobian(x, Y, N, m, PV, f_comp, Vswing, thetaSwing);
         x = newtonRaphson(jacobian, f_x, x);
         f_x = createMismatch(x, Y, N, m, PV, PQ_renumbered, Vswing, thetaSwing);

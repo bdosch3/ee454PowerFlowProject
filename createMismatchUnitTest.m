@@ -1,5 +1,7 @@
-%unit test for creating mismatching 
+% createMismatchUnitTest.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
 
+%unit test for creating mismatching 
 N = round(30*rand());
 m = round(5*rand());
 Yreal = rand(N,N);

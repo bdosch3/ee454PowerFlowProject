@@ -1,3 +1,6 @@
+% recordIteration.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function iterationRecord = recordIteration(f_x, S_BASE, count, dictionary, N, m)
 %{
 iterationRecord: keeps a log of the maxiumum real and reactive mismatches
@@ -28,7 +31,6 @@ output:
     iterationRecord(2) = S_BASE * P_max;
     iterationRecord(3) = dict(P_index + 1);
     iterationRecord(4) = S_BASE * Q_max;
-    iterationRecord(5) = dict(Q_index + m);
-    
+    iterationRecord(5) = dict(Q_index + m);  
 end
 

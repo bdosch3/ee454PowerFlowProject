@@ -1,3 +1,6 @@
+% recover.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function originalValues = recover (renumberedValues, dictionary, N)
 %{    
     recover_x rearrange a column vector so that the original bus numbering is

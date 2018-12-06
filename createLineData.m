@@ -1,3 +1,6 @@
+% createLineData.m
+% % by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function lineData = createLineData(S_BASE, V, theta, Ydata)
 %{
 computes powerflow data for each transmission line

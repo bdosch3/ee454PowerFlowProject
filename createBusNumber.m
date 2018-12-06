@@ -1,3 +1,6 @@
+% createBusNumber.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function busNumber = createBusNumber(N)
 %{
 creates bus number column vector from 1 to N

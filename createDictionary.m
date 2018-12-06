@@ -1,3 +1,6 @@
+% createDictionary.m
+% by Brad Dosch, Alex Htut, Bernardo Olivas, Muhammad Shafawi
+
 function dictionary = createDictionary(PV_buses, N)
 %{
 createDictionary 
